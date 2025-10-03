@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Contact Me</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- important for mobile scaling -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
@@ -25,8 +25,8 @@
       text-align: center;
       box-shadow: 0 8px 25px rgba(0,0,0,0.2);
       animation: fadeInUp 1s ease;
-      max-width: 600px;   /* bigger on desktop */
-      width: 100%;        /* always full width on small screens */
+      max-width: 600px;
+      width: 100%;
     }
 
     h1 {
@@ -41,9 +41,11 @@
       color: #555;
     }
 
-    button, .btn-link {
+    /* Unified button style */
+    .btn {
       display: block;
-      width: 100%;           /* full-width buttons on mobile */
+      width: 100%;
+      text-align: center;
       text-decoration: none;
       border: none;
       padding: 18px;
@@ -55,24 +57,23 @@
       margin: 12px 0;
     }
 
-    button {
+    .btn.email {
       background-color: #2575fc;
       color: white;
     }
 
-    button:hover {
+    .btn.email:hover {
       background-color: #1a5edb;
       transform: translateY(-2px);
       box-shadow: 0 6px 20px rgba(0,0,0,0.3);
     }
 
-    /* Instagram button */
-    .btn-link.instagram {
+    .btn.instagram {
       background: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
       color: white;
     }
 
-    .btn-link.instagram:hover {
+    .btn.instagram:hover {
       opacity: 0.95;
       transform: translateY(-2px);
       box-shadow: 0 6px 20px rgba(0,0,0,0.3);
@@ -108,18 +109,10 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* 📱 Mobile tweaks */
     @media (max-width: 500px) {
-      h1 {
-        font-size: 2em;
-      }
-      p {
-        font-size: 1.1em;
-      }
-      button, .btn-link {
-        font-size: 1.1em;
-        padding: 16px;
-      }
+      h1 { font-size: 2em; }
+      p { font-size: 1.1em; }
+      .btn { font-size: 1.1em; padding: 16px; }
     }
   </style>
 </head>
@@ -128,8 +121,8 @@
     <h1>Get in Touch</h1>
     <p>Click below to copy my email or visit my Instagram:</p>
 
-    <button id="copyBtn">📋 Copy Email</button>
-    <a class="btn-link instagram" href="https://www.instagram.com/bubushopnails?igsh=YmVreWNwZWJqZ3J6&utm_source=qr" target="_blank">
+    <button id="copyBtn" class="btn email">📋 Copy Email</button>
+    <a class="btn instagram" href="https://www.instagram.com/bubushopnails?igsh=YmVreWNwZWJqZ3J6&utm_source=qr" target="_blank">
       📸 Visit Instagram
     </a>
   </div>
@@ -158,7 +151,6 @@
       setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 2500);
     }
 
-    // Tiny confetti effect
     function launchConfetti() {
       for (let i = 0; i < 20; i++) {
         const confetti = document.createElement("div");
