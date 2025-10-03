@@ -41,9 +41,9 @@
       color: #555;
     }
 
-    button {
-      background-color: #2575fc;
-      color: white;
+    button, .btn-link {
+      display: inline-block;
+      text-decoration: none;
       border: none;
       padding: 15px 40px;
       font-size: 1.1em;
@@ -51,10 +51,28 @@
       cursor: pointer;
       transition: all 0.3s;
       box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      margin: 10px 0;
+    }
+
+    button {
+      background-color: #2575fc;
+      color: white;
     }
 
     button:hover {
       background-color: #1a5edb;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    }
+
+    /* Instagram button */
+    .btn-link.instagram {
+      background: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
+      color: white;
+    }
+
+    .btn-link.instagram:hover {
+      opacity: 0.9;
       transform: translateY(-3px);
       box-shadow: 0 6px 20px rgba(0,0,0,0.3);
     }
@@ -93,8 +111,12 @@
 <body>
   <div class="card">
     <h1>Get in Touch</h1>
-    <p>Click the button below to copy my email address:</p>
-    <button id="copyBtn">📋 Copy Email</button>
+    <p>Click below to copy my email or visit my Instagram:</p>
+
+    <button id="copyBtn">📋 Copy Email</button><br>
+    <a class="btn-link instagram" href="https://www.instagram.com/bubushopnails?igsh=YmVreWNwZWJqZ3J6&utm_source=qr" target="_blank">
+      📸 Visit Instagram
+    </a>
   </div>
 
   <div id="toast">✅ Email copied!</div>
