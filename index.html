@@ -3,85 +3,165 @@
 <head>
   <meta charset="UTF-8">
   <title>Contact Me</title>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
     body {
-      font-family: 'Roboto', sans-serif;
+      font-family: 'Inter', sans-serif;
       margin: 0;
       padding: 0;
       height: 100vh;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
       background: linear-gradient(135deg, #6a11cb, #2575fc);
-      color: white;
+      color: #333;
+      overflow: hidden;
+    }
+
+    .card {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
       text-align: center;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+      animation: fadeInUp 1s ease;
+      max-width: 400px;
+      width: 90%;
     }
 
     h1 {
-      font-size: 3em;
+      font-size: 2.5em;
       margin-bottom: 10px;
+      color: #2575fc;
     }
 
     p {
-      font-size: 1.2em;
+      font-size: 1.1em;
       margin-bottom: 30px;
+      color: #555;
     }
 
     button {
-      background-color: #ffffff;
-      color: #2575fc;
+      background-color: #2575fc;
+      color: white;
       border: none;
-      padding: 15px 35px;
-      font-size: 1.2em;
+      padding: 15px 40px;
+      font-size: 1.1em;
       border-radius: 30px;
       cursor: pointer;
-      transition: 0.3s;
+      transition: all 0.3s;
       box-shadow: 0 4px 15px rgba(0,0,0,0.2);
     }
 
     button:hover {
-      background-color: #f0f0f0;
+      background-color: #1a5edb;
       transform: translateY(-3px);
       box-shadow: 0 6px 20px rgba(0,0,0,0.3);
     }
 
-    #message {
-      margin-top: 20px;
-      font-weight: bold;
+    /* Toast notification */
+    #toast {
+      visibility: hidden;
+      min-width: 200px;
+      margin-left: -100px;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      border-radius: 25px;
+      padding: 12px;
+      position: fixed;
+      z-index: 1;
+      left: 50%;
+      bottom: 30px;
+      font-size: 1em;
+      opacity: 0;
+      transition: opacity 0.5s, bottom 0.5s;
     }
 
-    footer {
-      position: absolute;
-      bottom: 10px;
-      font-size: 0.9em;
-      opacity: 0.8;
+    #toast.show {
+      visibility: visible;
+      opacity: 1;
+      bottom: 50px;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
-  <h1>Contact Me</h1>
-  <p>Click the button below to copy my email address:</p>
-  <button id="copyBtn">Copy Email</button>
-  <p id="message"></p>
+  <div class="card">
+    <h1>Get in Touch</h1>
+    <p>Click the button below to copy my email address:</p>
+    <button id="copyBtn">📋 Copy Email</button>
+  </div>
 
-  <footer>Powered by GitHub Pages</footer>
+  <div id="toast">✅ Email copied!</div>
 
   <script>
-    document.getElementById('copyBtn').addEventListener('click', function() {
+    const button = document.getElementById('copyBtn');
+    const toast = document.getElementById('toast');
+
+    button.addEventListener('click', () => {
       const email = "youremail@example.com"; // change this
       navigator.clipboard.writeText(email)
         .then(() => {
-          const msg = document.getElementById('message');
-          msg.textContent = "Email copied!";
-          setTimeout(() => msg.textContent = "", 2000);
+          showToast();
+          launchConfetti();
         })
         .catch(() => {
-          const msg = document.getElementById('message');
-          msg.textContent = "Failed to copy.";
+          showToast("❌ Failed to copy");
         });
     });
+
+    function showToast(message = "✅ Email copied!") {
+      toast.textContent = message;
+      toast.className = "show";
+      setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 2500);
+    }
+
+    // Tiny confetti effect
+    function launchConfetti() {
+      for (let i = 0; i < 20; i++) {
+        const confetti = document.createElement("div");
+        confetti.style.position = "fixed";
+        confetti.style.width = "8px";
+        confetti.style.height = "8px";
+        confetti.style.backgroundColor = `hsl(${Math.random()*360}, 80%, 60%)`;
+        confetti.style.left = (window.innerWidth / 2) + "px";
+        confetti.style.top = (window.innerHeight / 2) + "px";
+        confetti.style.opacity = 1;
+        confetti.style.transform = "translate(-50%, -50%)";
+        document.body.appendChild(confetti);
+
+        const angle = Math.random() * 2 * Math.PI;
+        const velocity = 4 + Math.random() * 6;
+        const vx = Math.cos(angle) * velocity;
+        const vy = Math.sin(angle) * velocity;
+
+        let x = window.innerWidth / 2;
+        let y = window.innerHeight / 2;
+
+        const gravity = 0.3;
+        let frame = 0;
+
+        function animate() {
+          frame++;
+          x += vx;
+          y += vy + gravity * frame;
+          confetti.style.left = x + "px";
+          confetti.style.top = y + "px";
+          confetti.style.opacity -= 0.02;
+          if (confetti.style.opacity > 0) {
+            requestAnimationFrame(animate);
+          } else {
+            confetti.remove();
+          }
+        }
+        animate();
+      }
+    }
   </script>
 </body>
 </html>
