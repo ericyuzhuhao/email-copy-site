@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Contact Me</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
+    /* ensure consistent sizing */
+    * { box-sizing: border-box; }
+    html,body { height: 100%; margin: 0; }
+
     body {
       font-family: 'Inter', sans-serif;
       margin: 0;
@@ -20,193 +24,80 @@
 
     .card {
       background: white;
-      padding: 50px 30px;
-      border-radius: 20px;
+      padding: 40px 28px;
+      border-radius: 18px;
       text-align: center;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-      animation: fadeInUp 1s ease;
-      max-width: 600px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.18);
+      animation: fadeInUp 0.8s ease;
+      max-width: 640px;
       width: 100%;
     }
 
-    h1 {
-      font-size: 2.5em;
-      margin-bottom: 15px;
-      color: #2575fc;
-    }
+    h1 { font-size: 2.25rem; margin: 0 0 10px; color: #2575fc; }
+    p { font-size: 1.08rem; margin: 6px 0 26px; color: #555; }
 
-    p {
-      font-size: 1.2em;
-      margin-bottom: 35px;
-      color: #555;
-    }
-
-    /* Unified button style */
+    /* unified button base */
     .btn {
-      display: block;
+      display: flex;                      /* important: flex for perfect vertical centering */
+      align-items: center;
+      justify-content: center;
+      gap: 12px;                          /* space between icon and text */
       width: 100%;
-      text-align: center;
       text-decoration: none;
       border: none;
-      padding: 18px;
-      font-size: 1.2em;
+      padding: 16px 18px;
+      min-height: 54px;                   /* enforces uniform height */
+      font-size: 1.12rem;
       border-radius: 12px;
       cursor: pointer;
-      transition: all 0.3s;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-      margin: 12px 0;
-    }
-
-    .btn.email {
-      background-color: #2575fc;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+      margin: 10px 0;
       color: white;
+      font-family: inherit;
+      -webkit-appearance: none;
+      appearance: none;
+      line-height: 1;                     /* prevents vertical gaps with emoji */
     }
 
-    .btn.email:hover {
-      background-color: #1a5edb;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    /* visual focus for accessibility */
+    .btn:focus {
+      outline: 3px solid rgba(37,117,252,0.18);
+      outline-offset: 2px;
     }
 
-    .btn.instagram {
+    /* button variants */
+    .btn.email { background-color: #2575fc; }
+    .btn.email:hover { background-color: #1a5edb; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.18); }
+
+    .btn.instagram { 
       background: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
-      color: white;
     }
-
-    .btn.instagram:hover {
-      opacity: 0.95;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-    }
+    .btn.instagram:hover { opacity: 0.96; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.18); }
 
     .btn.order {
-      background: linear-gradient(45deg, #34d399, #059669); /* green gradient */
-      color: white;
+      background: linear-gradient(45deg, #34d399, #059669);
     }
+    .btn.order:hover { opacity: 0.96; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.18); }
 
-    .btn.order:hover {
-      opacity: 0.95;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-    }
+    /* icon and label pieces for exact alignment */
+    .icon { display:inline-flex; align-items:center; justify-content:center; font-size:1.15rem; line-height:1; }
+    .label { display:inline-block; line-height:1.1; }
 
-    /* Toast notification */
+    /* toast */
     #toast {
       visibility: hidden;
-      min-width: 200px;
-      margin-left: -100px;
+      min-width: 220px;
       background-color: #333;
       color: #fff;
       text-align: center;
-      border-radius: 25px;
-      padding: 12px;
+      border-radius: 24px;
+      padding: 10px 14px;
       position: fixed;
-      z-index: 1;
+      z-index: 10;
       left: 50%;
-      bottom: 30px;
-      font-size: 1em;
+      bottom: 28px;
+      transform: translateX(-50%);
       opacity: 0;
-      transition: opacity 0.5s, bottom 0.5s;
-    }
-
-    #toast.show {
-      visibility: visible;
-      opacity: 1;
-      bottom: 50px;
-    }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @media (max-width: 500px) {
-      h1 { font-size: 2em; }
-      p { font-size: 1.1em; }
-      .btn { font-size: 1.1em; padding: 16px; }
-    }
-  </style>
-</head>
-<body>
-  <div class="card">
-    <h1>Get in Touch</h1>
-    <p>Choose an option below to connect with me:</p>
-
-    <button id="copyBtn" class="btn email">📋 Copy Email for E-Transfer</button>
-
-    <a class="btn instagram" href="https://www.instagram.com/bubushopnails?igsh=YmVreWNwZWJqZ3J6&utm_source=qr" target="_blank">
-      📸 Visit Instagram
-    </a>
-
-    <a class="btn order" href="https://form.jotform.com/252566064286261" target="_blank">
-      🛒 Place Order
-    </a>
-  </div>
-
-  <div id="toast">✅ Email copied!</div>
-
-  <script>
-    const button = document.getElementById('copyBtn');
-    const toast = document.getElementById('toast');
-
-    button.addEventListener('click', () => {
-      const email = "youremail@example.com"; // <-- replace with your email
-      navigator.clipboard.writeText(email)
-        .then(() => {
-          showToast("✅ E-Transfer email copied!");
-          launchConfetti();
-        })
-        .catch(() => {
-          showToast("❌ Failed to copy");
-        });
-    });
-
-    function showToast(message) {
-      toast.textContent = message;
-      toast.className = "show";
-      setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 2500);
-    }
-
-    function launchConfetti() {
-      for (let i = 0; i < 20; i++) {
-        const confetti = document.createElement("div");
-        confetti.style.position = "fixed";
-        confetti.style.width = "8px";
-        confetti.style.height = "8px";
-        confetti.style.backgroundColor = `hsl(${Math.random()*360}, 80%, 60%)`;
-        confetti.style.left = (window.innerWidth / 2) + "px";
-        confetti.style.top = (window.innerHeight / 2) + "px";
-        confetti.style.opacity = 1;
-        confetti.style.transform = "translate(-50%, -50%)";
-        document.body.appendChild(confetti);
-
-        const angle = Math.random() * 2 * Math.PI;
-        const velocity = 4 + Math.random() * 6;
-        const vx = Math.cos(angle) * velocity;
-        const vy = Math.sin(angle) * velocity;
-
-        let x = window.innerWidth / 2;
-        let y = window.innerHeight / 2;
-
-        const gravity = 0.3;
-        let frame = 0;
-
-        function animate() {
-          frame++;
-          x += vx;
-          y += vy + gravity * frame;
-          confetti.style.left = x + "px";
-          confetti.style.top = y + "px";
-          confetti.style.opacity -= 0.02;
-          if (confetti.style.opacity > 0) {
-            requestAnimationFrame(animate);
-          } else {
-            confetti.remove();
-          }
-        }
-        animate();
-      }
-    }
-  </script>
-</body>
-</html>
+      transition: opacity 0.35s, bottom 0.35s;
+      fo
