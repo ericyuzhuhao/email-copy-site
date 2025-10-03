@@ -4,13 +4,14 @@
   <meta charset="UTF-8" />
   <title>Contact Me</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
   <style>
     /* ensure consistent sizing */
     * { box-sizing: border-box; }
     html,body { height: 100%; margin: 0; }
 
     body {
+      /* Comfortaa for a whimsical/rounded header, Inter for body */
       font-family: 'Inter', sans-serif;
       margin: 0;
       padding: 20px;
@@ -18,81 +19,129 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(135deg, #6a11cb, #2575fc);
-      color: #333;
+      /* Dreamy Pastel Gradient Background */
+      background: linear-gradient(135deg, #a8c0ff, #ffafda, #a8ffb1); /* Pastel blue, pink, mint green */
+      color: #3d3b4b; /* Soft dark color */
+      position: relative;
+      overflow: hidden; /* For the confetti/sparkle effect */
     }
 
+    /* Subtle Sparkle/Confetti background effect */
+    body::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.4)"/><circle cx="30" cy="80" r="0.5" fill="rgba(255,255,255,0.3)"/><circle cx="70" cy="20" r="0.8" fill="rgba(255,255,255,0.5)"/></svg>') repeat;
+      opacity: 0.6;
+      pointer-events: none;
+      animation: pulse 4s infinite alternate;
+    }
+    @keyframes pulse {
+        from { opacity: 0.6; } to { opacity: 0.8; }
+    }
+
+
     .card {
-      background: white;
+      background: rgba(255, 255, 255, 0.9); /* Slightly transparent white for softness */
+      backdrop-filter: blur(8px); /* Gives a soft, frosted-glass effect */
       padding: 40px 28px;
-      border-radius: 18px;
+      border-radius: 25px; /* More rounded corners */
       text-align: center;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.18);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1); /* Softer shadow */
+      border: 1px solid rgba(255, 255, 255, 0.5); /* Subtle white border */
       animation: fadeInUp 0.8s ease;
       max-width: 640px;
       width: 100%;
     }
 
-    h1 { font-size: 2.25rem; margin: 0 0 10px; color: #2575fc; }
-    p { font-size: 1.08rem; margin: 6px 0 26px; color: #555; }
+    h1 { 
+      font-family: 'Comfortaa', cursive; /* Playful font for the header */
+      font-size: 2.5rem; 
+      margin: 0 0 10px; 
+      color: #7b4397; /* A deep pastel purple for contrast */
+      text-shadow: 1px 1px 3px rgba(255,255,255,0.5); /* Soft text shadow */
+    }
+    p { 
+      font-size: 1.1rem; 
+      margin: 6px 0 30px; 
+      color: #666; /* Soft gray */
+    }
 
     /* unified button base */
     .btn {
-      display: flex;                      /* important: flex for perfect vertical centering */
+      display: flex;
       align-items: center;
       justify-content: center;
-      gap: 12px;                          /* space between icon and text */
+      gap: 12px;
       width: 100%;
       text-decoration: none;
       border: none;
       padding: 16px 18px;
-      min-height: 54px;                   /* enforces uniform height */
-      font-size: 1.12rem;
-      border-radius: 12px;
+      min-height: 54px;
+      font-size: 1.15rem;
+      border-radius: 15px; /* More rounded button corners */
       cursor: pointer;
-      transition: transform 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.12);
-      margin: 10px 0;
+      transition: all 0.25s ease; /* Smoother, unified transition */
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      margin: 12px 0; /* Slightly more space */
       color: white;
-      font-family: inherit;
+      font-family: 'Comfortaa', cursive; /* Use the playful font for buttons too */
+      font-weight: 700;
       -webkit-appearance: none;
       appearance: none;
-      line-height: 1;                     /* prevents vertical gaps with emoji */
+      line-height: 1;
     }
 
     /* visual focus for accessibility */
     .btn:focus {
-      outline: 3px solid rgba(37,117,252,0.18);
+      outline: 4px solid rgba(255, 182, 193, 0.5); /* Pastel pink focus ring */
       outline-offset: 2px;
     }
 
-    /* button variants */
-    .btn.email { background-color: #2575fc; }
-    .btn.email:hover { background-color: #1a5edb; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.18); }
+    /* button variants - using pastel gradients */
+    .btn.email { 
+      /* Pastel Blue/Purple Gradient */
+      background: linear-gradient(90deg, #a8c0ff, #7b4397); 
+    }
+    .btn.email:hover { 
+      transform: scale(1.02); 
+      box-shadow: 0 6px 20px rgba(123, 67, 151, 0.3); /* Purple-tinted shadow */
+    }
 
     .btn.instagram { 
-      background: linear-gradient(45deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
+      /* Pastel Pink/Orange/Purple Instagram-inspired Gradient */
+      background: linear-gradient(45deg, #ffafda, #ffc3a0, #7b4397);
     }
-    .btn.instagram:hover { opacity: 0.96; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.18); }
+    .btn.instagram:hover { 
+      transform: scale(1.02); 
+      box-shadow: 0 6px 20px rgba(255, 175, 218, 0.3); /* Pink-tinted shadow */
+    }
 
     .btn.order {
-      background: linear-gradient(45deg, #34d399, #059669);
+      /* Pastel Mint/Green Gradient */
+      background: linear-gradient(90deg, #a8ffb1, #48c6ef); /* Mint green to sky blue */
     }
-    .btn.order:hover { opacity: 0.96; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.18); }
+    .btn.order:hover { 
+      transform: scale(1.02); 
+      box-shadow: 0 6px 20px rgba(168, 255, 177, 0.3); /* Mint-tinted shadow */
+    }
 
     /* icon and label pieces for exact alignment */
-    .icon { display:inline-flex; align-items:center; justify-content:center; font-size:1.15rem; line-height:1; }
+    .icon { display:inline-flex; align-items:center; justify-content:center; font-size:1.2rem; line-height:1; }
     .label { display:inline-block; line-height:1.1; }
 
     /* toast */
     #toast {
       visibility: hidden;
-      min-width: 220px;
-      background-color: #333;
-      color: #fff;
+      min-width: 240px;
+      background-color: #ffafda; /* Pastel pink background */
+      color: #3d3b4b; /* Soft dark text */
       text-align: center;
-      border-radius: 24px;
-      padding: 10px 14px;
+      border-radius: 28px; /* More rounded */
+      padding: 12px 18px;
       position: fixed;
       z-index: 10;
       left: 50%;
@@ -100,7 +149,8 @@
       transform: translateX(-50%);
       opacity: 0;
       transition: opacity 0.35s, bottom 0.35s;
-      font-size: 0.98rem;
+      font-size: 1.0rem;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     }
     #toast.show { visibility: visible; opacity: 1; bottom: 46px; }
 
@@ -111,33 +161,35 @@
     /* responsive tweaks */
     @media (max-width: 520px) {
       .card { padding: 36px 18px; }
-      h1 { font-size: 1.9rem; }
-      p { font-size: 1.03rem; margin-bottom: 20px; }
-      .btn { padding: 14px 14px; min-height: 52px; font-size: 1.05rem; gap:10px; }
+      h1 { font-size: 2.1rem; }
+      p { font-size: 1.05rem; margin-bottom: 24px; }
+      .btn { padding: 14px 14px; min-height: 52px; font-size: 1.08rem; gap:10px; }
     }
+
+    /* Confetti (ensure it uses pastel colors) */
+    /* The confetti script will generate elements with inline styles, 
+       so no need to change existing confetti CSS, as it uses HSL. 
+       However, we will make the colors more pastel-like in the script. */
   </style>
 </head>
 <body>
   <div class="card">
-    <h1>Get in Touch</h1>
-    <p>Choose an option below to connect with me:</p>
+    <h1>✨ Bubu Shop Connect ✨</h1>
+    <p>Find the best way to shop or reach out to us:</p>
 
-    <!-- Copy email button -->
     <button id="copyBtn" class="btn email" aria-label="Copy email for e-transfer">
-      <span class="icon" aria-hidden>📋</span>
-      <span class="label">Copy Email for E-Transfer</span>
+      <span class="icon" aria-hidden>💌</span>
+      <span class="label">Copy E-Transfer Email</span>
     </button>
 
-    <!-- Instagram (anchor with role button) -->
     <a class="btn instagram" href="https://www.instagram.com/bubushopnails?igsh=YmVreWNwZWJqZ3J6&utm_source=qr" role="button" target="_blank" rel="noopener">
-      <span class="icon" aria-hidden>📸</span>
-      <span class="label">Visit Instagram</span>
+      <span class="icon" aria-hidden>💖</span>
+      <span class="label">Visit Our Instagram</span>
     </a>
 
-    <!-- Place Order -->
     <a class="btn order" href="https://form.jotform.com/252566064286261" role="button" target="_blank" rel="noopener">
-      <span class="icon" aria-hidden>🛒</span>
-      <span class="label">Place Order</span>
+      <span class="icon" aria-hidden>🛍️</span>
+      <span class="label">Place Custom Order</span>
     </a>
   </div>
 
@@ -171,7 +223,9 @@
         confetti.style.position = "fixed";
         confetti.style.width = "8px";
         confetti.style.height = "8px";
-        confetti.style.backgroundColor = `hsl(${Math.random()*360}, 80%, 60%)`;
+        /* Tweaked HSL values for PASTEL confetti: 
+           High Lightness (L) and moderate Saturation (S) */
+        confetti.style.backgroundColor = `hsl(${Math.random()*360}, 75%, 80%)`; 
         confetti.style.left = (window.innerWidth / 2) + "px";
         confetti.style.top = (window.innerHeight / 2) + "px";
         confetti.style.opacity = 1;
