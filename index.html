@@ -100,4 +100,106 @@
       transform: translateX(-50%);
       opacity: 0;
       transition: opacity 0.35s, bottom 0.35s;
-      fo
+      font-size: 0.98rem;
+    }
+    #toast.show { visibility: visible; opacity: 1; bottom: 46px; }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* responsive tweaks */
+    @media (max-width: 520px) {
+      .card { padding: 36px 18px; }
+      h1 { font-size: 1.9rem; }
+      p { font-size: 1.03rem; margin-bottom: 20px; }
+      .btn { padding: 14px 14px; min-height: 52px; font-size: 1.05rem; gap:10px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Get in Touch</h1>
+    <p>Choose an option below to connect with me:</p>
+
+    <!-- Copy email button -->
+    <button id="copyBtn" class="btn email" aria-label="Copy email for e-transfer">
+      <span class="icon" aria-hidden>📋</span>
+      <span class="label">Copy Email for E-Transfer</span>
+    </button>
+
+    <!-- Instagram (anchor with role button) -->
+    <a class="btn instagram" href="https://www.instagram.com/bubushopnails?igsh=YmVreWNwZWJqZ3J6&utm_source=qr" role="button" target="_blank" rel="noopener">
+      <span class="icon" aria-hidden>📸</span>
+      <span class="label">Visit Instagram</span>
+    </a>
+
+    <!-- Place Order -->
+    <a class="btn order" href="https://form.jotform.com/252566064286261" role="button" target="_blank" rel="noopener">
+      <span class="icon" aria-hidden>🛒</span>
+      <span class="label">Place Order</span>
+    </a>
+  </div>
+
+  <div id="toast" role="status" aria-live="polite">✅ E-Transfer email copied!</div>
+
+  <script>
+    const copyBtn = document.getElementById('copyBtn');
+    const toast = document.getElementById('toast');
+
+    copyBtn.addEventListener('click', () => {
+      const email = "youremail@example.com"; // <-- replace with your email
+      navigator.clipboard.writeText(email)
+        .then(() => {
+          showToast("✅ E-Transfer email copied!");
+          launchConfetti();
+        })
+        .catch(() => {
+          showToast("❌ Failed to copy");
+        });
+    });
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2500);
+    }
+
+    function launchConfetti() {
+      for (let i = 0; i < 20; i++) {
+        const confetti = document.createElement("div");
+        confetti.style.position = "fixed";
+        confetti.style.width = "8px";
+        confetti.style.height = "8px";
+        confetti.style.backgroundColor = `hsl(${Math.random()*360}, 80%, 60%)`;
+        confetti.style.left = (window.innerWidth / 2) + "px";
+        confetti.style.top = (window.innerHeight / 2) + "px";
+        confetti.style.opacity = 1;
+        confetti.style.transform = "translate(-50%, -50%)";
+        document.body.appendChild(confetti);
+
+        const angle = Math.random() * 2 * Math.PI;
+        const velocity = 4 + Math.random() * 6;
+        const vx = Math.cos(angle) * velocity;
+        const vy = Math.sin(angle) * velocity;
+        let x = window.innerWidth / 2;
+        let y = window.innerHeight / 2;
+        const gravity = 0.3;
+        let frame = 0;
+
+        function animate() {
+          frame++;
+          x += vx;
+          y += vy + gravity * frame;
+          confetti.style.left = x + "px";
+          confetti.style.top = y + "px";
+          confetti.style.opacity -= 0.02;
+          if (+confetti.style.opacity > 0) requestAnimationFrame(animate);
+          else confetti.remove();
+        }
+        animate();
+      }
+    }
+  </script>
+</body>
+</html>
