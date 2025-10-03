@@ -79,6 +79,17 @@
       box-shadow: 0 6px 20px rgba(0,0,0,0.3);
     }
 
+    .btn.order {
+      background: linear-gradient(45deg, #34d399, #059669); /* green gradient */
+      color: white;
+    }
+
+    .btn.order:hover {
+      opacity: 0.95;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    }
+
     /* Toast notification */
     #toast {
       visibility: hidden;
@@ -119,11 +130,16 @@
 <body>
   <div class="card">
     <h1>Get in Touch</h1>
-    <p>Click below to copy my email or visit my Instagram:</p>
+    <p>Choose an option below to connect with me:</p>
 
-    <button id="copyBtn" class="btn email">📋 Copy Email to E-Transfer</button>
+    <button id="copyBtn" class="btn email">📋 Copy Email for E-Transfer</button>
+
     <a class="btn instagram" href="https://www.instagram.com/bubushopnails?igsh=YmVreWNwZWJqZ3J6&utm_source=qr" target="_blank">
       📸 Visit Instagram
+    </a>
+
+    <a class="btn order" href="https://form.jotform.com/252566064286261" target="_blank">
+      🛒 Place Order
     </a>
   </div>
 
@@ -134,10 +150,10 @@
     const toast = document.getElementById('toast');
 
     button.addEventListener('click', () => {
-      const email = "youremail@example.com"; // change this
+      const email = "youremail@example.com"; // <-- replace with your email
       navigator.clipboard.writeText(email)
         .then(() => {
-          showToast();
+          showToast("✅ E-Transfer email copied!");
           launchConfetti();
         })
         .catch(() => {
@@ -145,7 +161,7 @@
         });
     });
 
-    function showToast(message = "✅ Email copied!") {
+    function showToast(message) {
       toast.textContent = message;
       toast.className = "show";
       setTimeout(() => { toast.className = toast.className.replace("show", ""); }, 2500);
