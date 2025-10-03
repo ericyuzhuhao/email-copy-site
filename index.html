@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact Me</title>
+  <style>
+    body { font-family: sans-serif; text-align: center; margin-top: 100px; }
+    button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
+    #message { margin-top: 20px; color: green; }
+  </style>
+</head>
+<body>
+  <h2>Contact Me</h2>
+  <p>Click below to copy my email address:</p>
+  
+  <button id="copyBtn">Copy Email</button>
+  <p id="message"></p>
+  
+  <script>
+    document.getElementById('copyBtn').addEventListener('click', function() {
+      const email = "yourname@example.com"; // change this
+      navigator.clipboard.writeText(email)
+        .then(() => {
+          const msg = document.getElementById('message');
+          msg.textContent = "Email copied!";
+          setTimeout(() => msg.textContent = "", 2000);
+        })
+        .catch(() => {
+          const msg = document.getElementById('message');
+          msg.textContent = "Failed to copy.";
+        });
+    });
+  </script>
+</body>
+</html>
